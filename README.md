@@ -2,14 +2,14 @@
 
 This project is a high-performance, production-ready Bookstore REST API developed as part of **Phase 2** of the .NET Backend Roadmap. It strictly follows **Clean Architecture** principles and implements modern industry standards for security, validation, and testing.
 
-## ?? Architectural Overview
+## 🏗 Architectural Overview
 The solution is organized into four distinct layers to ensure separation of concerns and maintainability:
 * **Domain:** Contains Enterprise entities, Value Objects, and Domain logic.
 * **Application:** Handles Business Logic, DTOs, Mapping, and Request Validation (FluentValidation).
 * **Infrastructure:** Manages Data Persistence (EF Core / SQL Server) and External Services.
 * **API:** The entry point (ASP.NET Core) handling Controllers, Middleware, and Dependency Injection.
 
-## ?? Key Technical Implementations
+## 🚀 Key Technical Implementations
 
 ### 1. Security & Resilience
 * **JWT Authentication:** Secure endpoint access using JSON Web Tokens.
@@ -24,14 +24,14 @@ The solution is organized into four distinct layers to ensure separation of conc
 * **RESTful Design:** Proper use of HTTP verbs and status codes.
 * **Swagger/OpenAPI:** Comprehensive documentation for API consumers.
 
-## ?? Tech Stack
+## 🛠 Tech Stack
 * **Framework:** .NET 8/9 (ASP.NET Core)
 * **ORM:** Entity Framework Core
 * **Database:** SQL Server
 * **Testing:** xUnit & WebApplicationFactory
 * **Validation:** FluentValidation
 
-## ?? Setup & Execution
+## ⚙️ Setup & Execution
 
 1. **Clone & Restore:**
    \git clone https://github.com/Mohammed-Refat/Bookstore-WebAPI-Phase2.git\
