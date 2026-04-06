@@ -1,0 +1,32 @@
+# Bookstore Web API - Phase 2 Assessment
+
+A robust RESTful Web API for managing a bookstore system, built with ASP.NET Core. This project demonstrates backend architectural patterns and database management.
+
+## 🚀 Key Features
+
+### 1. Book Management
+* Full CRUD operations (Create, Read, Update, Delete) for Books and Authors.
+* Search and Filtering functionality by genre, author, or price.
+
+### 2. Data Persistence
+* **Entity Framework Core** with SQL Server.
+* One-to-Many relationships (Author has many Books).
+* Data Seeding for initial categories and books.
+
+### 3. API Standards
+* **Swagger/OpenAPI** integration for easy testing.
+* **AutoMapper** for decoupling Entities from DTOs.
+* Global Exception Handling using Middleware.
+
+## 🛠 Tech Stack
+* **Framework:** ASP.NET Core 8/9
+* **ORM:** Entity Framework Core
+* **Database:** SQL Server
+* **Documentation:** Swagger UI
+
+## ⚙️ Setup & Installation
+1. Clone the repository.
+2. Update the `DefaultConnection` string in `appsettings.json`.
+3. Open PowerShell and run:
+   ```powershell
+   dotnet ef database update
