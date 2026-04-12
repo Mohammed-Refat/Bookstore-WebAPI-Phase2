@@ -6,6 +6,9 @@ using FluentValidation;
 using Bookstore.API.Middleware;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +60,38 @@ builder.Services.AddRateLimiter(options =>
     };
 });
 
+// ── JWT Authentication ────────────────────────────────────────────
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
+
+builder.Services.AddAuthentication(options =>
+{
+    // Every request uses JWT bearer by default
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        // Validate the server that issued the token
+        ValidateIssuer = true,
+        ValidIssuer = jwtSettings["Issuer"],
+
+        // Validate the intended recipient
+        ValidateAudience = true,
+        ValidAudience = jwtSettings["Audience"],
+
+        // Validate the secret key signature
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+
+        // Validate the expiry time
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero // no grace period after expiry
+    };
+});
+
 var app = builder.Build();
 
 // ── Middleware Pipeline ───────────────────────────────────────────
@@ -71,7 +106,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication(); // who are you?
+app.UseAuthorization();  // are you allowed?
 
 app.UseRateLimiter();
 

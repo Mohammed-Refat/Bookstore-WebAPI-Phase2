@@ -1,6 +1,7 @@
 ﻿using Bookstore.Application.DTOs;
 using Bookstore.Application.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
@@ -10,6 +11,7 @@ namespace Bookstore.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [EnableRateLimiting("per-user")] // applies sliding window to ALL endpoints in this controller
+[Authorize] // every endpoint in this controller requires a valid JWT
 public class BooksController : ControllerBase
 {
     private readonly IBookService _service;
