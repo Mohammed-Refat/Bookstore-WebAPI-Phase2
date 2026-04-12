@@ -2,11 +2,14 @@
 using Bookstore.Application.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Bookstore.API.Controllers;
 
+
 [ApiController]
 [Route("api/[controller]")]
+[EnableRateLimiting("per-user")] // applies sliding window to ALL endpoints in this controller
 public class BooksController : ControllerBase
 {
     private readonly IBookService _service;
